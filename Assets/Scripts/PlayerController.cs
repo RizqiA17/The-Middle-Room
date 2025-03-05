@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
+    public Transform povCamera;
 
     public float speed = 5f;
     public float gravity = -15f;
@@ -67,8 +68,8 @@ public class PlayerController : MonoBehaviour
 
         yRotation += mouseX;
 
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation , 0f);
-        //playerBody.Rotate(Vector3.up * mouseX);
+        transform.localRotation = Quaternion.Euler(0f, yRotation , 0f);
+        povCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         if (Input.GetKeyDown(KeyCode.Slash))
         {
