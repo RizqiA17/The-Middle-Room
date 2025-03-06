@@ -67,6 +67,9 @@ namespace SojaExiles
 			yield return new WaitForSeconds(.5f);
 		}
 
-
-	}
+        private void OnCollisionEnter(Collision collision)
+        {
+			print("tes");
+        }
+    }
 }

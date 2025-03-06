@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 5f;
     public float gravity = -15f;
+    public float jumpForce = 7f;
 
     bool isGrounded;
     bool mouseLocked;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
         Movement();
         CheckGround();
         MouseRotate();
+
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void Movement()
@@ -39,8 +43,16 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = (transform.right * x + transform.forward * z) * speed;
 
+        if (Input.GetButton("Jump")) Jump(move);
+
         if (isGrounded) Move(move);
         else Gravity(move);
+    }
+
+    void Jump(Vector3 velocity)
+    {
+        velocity.y = jumpForce;
+        Move(velocity);
     }
 
     void Gravity(Vector3 velocity)
